@@ -10,7 +10,7 @@
 void init(void) {
     CLK_HSIPrescalerConfig(CLK_PRESCALER_HSIDIV1); // taktovani MCU na 16MHz
 
-    GPIO_Init(DIN_PORT, DIN_PIN, GPIO_MODE_OUT_PP_LOW_SLOW);
+    GPIO_Init(DIN_PORT, DIN_PIN, GPIO_MODE_OUT_PP_LOW_SLOW); //Incializace portů a pinů
     GPIO_Init(CS_PORT, CS_PIN, GPIO_MODE_OUT_PP_HIGH_SLOW);
     GPIO_Init(CLK_PORT, CLK_PIN, GPIO_MODE_OUT_PP_LOW_SLOW);
 
@@ -78,28 +78,28 @@ int main(void) {
 
     while(1){
 
-        if (milis() - time1 > 1000){
+        if (milis() - time1 > 1000){ //za 1s se přidá číslo
             time1 = milis();
-            display(DIGIT0, number1);
-            number1 += 1;
+            display(DIGIT0, number1); //vypíše na digitu 0 (uplně vpravo) číslo 0
+            number1 += 1; //po sekundě přidá 1
 
-            if(number1 > 9){
+            if(number1 > 9){ //jakmile je číslo 10 změní se opět na nulu
                 number1 = 0;
             }
             }
 
-        if (milis() - time2 > 100) {
+        if (milis() - time2 > 100) { //za 0,1s se přidá číslo
             time2 = milis();
-            vysledek1 = number2 / 100;
-            display(DIGIT6, vysledek1);
-            n = number2 % 100;
-            vysledek2 = n / 10;
-            display(DIGIT5, vysledek2);
-            n = number2 % 10;
-            display(DIGIT4, n);
-            number2 += 1;
+            vysledek1 = number2 / 100; //dělím 100 abych byl na řádu stovek
+            display(DIGIT6, vysledek1); //vypíše číslo na digitu 6
+            n = number2 % 100; //získávám zbytek
+            vysledek2 = n / 10; //dělím 10 abych byl na řádu desítek
+            display(DIGIT5, vysledek2); //vypíše číslo na digitu 5
+            n = number2 % 10; //získávám zbytek
+            display(DIGIT4, n); //vypíše číslo na digitu 4
+            number2 += 1; //po 0,1s se přidá 1
 
-            if(number2 > 999){
+            if(number2 > 999){ //jakmile je číslo 1000 změní se opět na nulu
                 number2 = 0;
             }
         }
